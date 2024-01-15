@@ -28,6 +28,7 @@ description (string) - the description the product belongs to (i.e., dog, cat)
 available (boolean) - True for products that are available for adoption
 
 """
+
 import logging
 from enum import Enum
 from decimal import Decimal
@@ -39,15 +40,12 @@ logger = logging.getLogger("flask.app")
 # Create the SQLAlchemy object to be initialized later in init_db()
 db = SQLAlchemy()
 
-
 def init_db(app):
     """Initialize the SQLAlchemy app"""
     Product.init_db(app)
 
-
 class DataValidationError(Exception):
-    """Used for an data validation errors when deserializing"""
-
+    """Used for data validation errors when deserializing"""
 
 class Category(Enum):
     """Enumeration of valid Product Categories"""
@@ -58,7 +56,6 @@ class Category(Enum):
     HOUSEWARES = 3
     AUTOMOTIVE = 4
     TOOLS = 5
-
 
 class Product(db.Model):
     """
@@ -167,7 +164,7 @@ class Product(db.Model):
         # This is where we initialize SQLAlchemy from the Flask app
         db.init_app(app)
         app.app_context().push()
-        db.create_all()  # make our sqlalchemy tables
+        db.create_all()  # make our SQLAlchemy tables
 
     @classmethod
     def all(cls) -> list:
@@ -177,7 +174,7 @@ class Product(db.Model):
 
     @classmethod
     def find(cls, product_id: int):
-        """Finds a Product by it's ID
+        """Finds a Product by its ID
 
         :param product_id: the id of the Product to find
         :type product_id: int
@@ -225,7 +222,7 @@ class Product(db.Model):
         """Returns all Products by their availability
 
         :param available: True for products that are available
-        :type available: str
+        :type available: bool
 
         :return: a collection of Products that are available
         :rtype: list
